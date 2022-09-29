@@ -1,0 +1,15 @@
+{
+  "presets": ["es2015"],
+  "plugins": [
+    [
+      "transform-object-rest-spread",
+      {
+        "useBuiltIns": true
+      }
+    ],
+    [
+      "@babel/plugin-proposal-optional-chaining"
+  ]
+  ],
+  "test": ["jest"]
+}
