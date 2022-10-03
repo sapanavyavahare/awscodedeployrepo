@@ -1,0 +1,122 @@
+ sequelize model:generate --name User --attributes firstName:string,lastName:string,email:string
+ sequelize model:generate --name Company --attributes Name:string,companyCode:string
+
+sequelize db:migrate
+
+ sequelize model:generate --name Post--attributes coment:string
+
+sequelize seed:generate --name demo-company
+
+to run seeder
+sequelize db:seed:all
+
+'use strict';
+
+module.exports = {
+  async up (queryInterface, Sequelize) {
+    return queryInterface.bulkInsert('companies', [
+      {
+          name:'HappiestMinds',
+          companyCode:'HM',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+      },
+      {
+        name:'TCS',
+        companyCode:'TCS',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+      },
+      {
+        name:'Microsoft',
+        companyCode:'Microsoft',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+      },
+      {
+        name:'Honeywell',
+        companyCode:'Honeywell',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+      },
+      {
+        name:'Snider',
+        companyCode:'Snider',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+      },
+  ]);
+    /**
+     * Add seed commands here.
+     *
+     * Example:
+     * await queryInterface.bulkInsert('People', [{
+     *   name: 'John Doe',
+     *   isBetaMember: false
+     * }], {});
+    */
+  },
+
+  async down (queryInterface, Sequelize) {
+    return queryInterface.bulkDelete('Companies', null, {});
+    /**
+     * Add commands to revert seed here.
+     *
+     * Example:
+     * await queryInterface.bulkDelete('People', null, {});
+     */
+  }
+};
+
+sequelize migration:generate --name  add-foregin-key-in-user
+
+
+
+
+
+
+
+
+
+
+'use strict';
+module.exports = {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.createTable('Users', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      firstName: {
+        type: Sequelize.STRING
+      },
+      lastName: {
+        type: Sequelize.STRING
+      },
+      email: {
+        type: Sequelize.STRING
+      },
+      companyId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {         // User belongsTo Company 1:1
+          model: 'Companies',
+          key: 'id'
+        }
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      }
+    });
+  },
+  async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable('Users');
+  }
+};
