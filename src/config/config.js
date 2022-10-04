@@ -1,6 +1,4 @@
-const dotenv = require('dotenv').config({
-    path: 'C:/Users/Sapana.vyavahare/OneDrive - Happiest Minds Technologies Pvt Ltd/Documents/nodejsAssignment/node-demo/awscodedeployrepo/.env',
-});
+const dotenv = require('dotenv').config({});
 //console.log(process.env.DB_USERNAME);
 module.exports = {
     development: {
